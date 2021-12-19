@@ -7,7 +7,7 @@
 ### :pushpin: DNS(Domain Name Service)란?
 
 - 사람이 알아보기 쉬운 도메인 주소를 컴퓨터가 사용하는 IP 주소로 변환하는 서비스
-- www.naver.com뒤에 보이지 않는 **.(dot)**이 붙어있음, www.naver.com.
+- www.naver.com뒤에 보이지 않는 .(dot)이 붙어있음, www.naver.com.
   - **.(dot)** 은 **Root**라는 뜻 
 - **도메인 네임 스페이스**, **네임 서버**, **리졸버**로 이루어짐
   - **도메인 네임 스페이스** : 최상위 Root DNS 서버 존재, 하위로 노드가 연속해서 이어진 계층구조
