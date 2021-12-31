@@ -12,4 +12,5 @@
 - [Database](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/Database.md)
 - [Network](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/Network.md)
 - [Network Security](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/Network%20Security.md)
+- [C++ Memory Model](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/C%2B%2B%20Memory%20Model.md) 
 
