@@ -96,3 +96,17 @@
 - **스택과 힙 메모리 할당 방향**
 
   ![Untitled Diagram drawio (1)](https://user-images.githubusercontent.com/55940552/147821901-c1d3af55-0e1f-4123-9b88-6e9ca4611994.png) 
+
+<br>
+
+### :pushpin: 메모리 모델
+
+- class 1 : 변수와 메모리
+
+### :pushpin: 변수와 메모리
+
+![캡처](https://user-images.githubusercontent.com/55940552/147939914-e85cc6a7-1e4c-430a-bac4-5a8176c27a2e.PNG) 
+
+- 프로그램 실행 시 이러한 정적 데이터는 stack에 저장된다.
+
+![Untitled Diagram drawio](https://user-images.githubusercontent.com/55940552/147940139-deb3a7bf-a97c-48f3-916a-99c4ff1e930a.png) 
