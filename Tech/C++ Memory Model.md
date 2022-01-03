@@ -101,12 +101,4 @@
 
 ### :pushpin: 메모리 모델
 
-- class 1 : 변수와 메모리
-
-### :pushpin: 변수와 메모리
-
-![캡처](https://user-images.githubusercontent.com/55940552/147939914-e85cc6a7-1e4c-430a-bac4-5a8176c27a2e.PNG) 
-
-- 프로그램 실행 시 이러한 정적 데이터는 stack에 저장된다.
-
-![Untitled Diagram drawio](https://user-images.githubusercontent.com/55940552/147940139-deb3a7bf-a97c-48f3-916a-99c4ff1e930a.png) 
+- class 1 : [:page_facing_up: 변수와 메모리](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/C%2B%2B%20Memory%20Model%20Class/C%2B%2B%20Memory%20Model%20%EB%B3%80%EC%88%98%EC%99%80%20%EB%A9%94%EB%AA%A8%EB%A6%AC.md) 
