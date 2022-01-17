@@ -102,3 +102,5 @@
 ### :pushpin: 메모리 모델
 
 - class 1 : [:page_facing_up: 변수와 메모리](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/C%2B%2B%20Memory%20Model%20Class/C%2B%2B%20Memory%20Model%20%EB%B3%80%EC%88%98%EC%99%80%20%EB%A9%94%EB%AA%A8%EB%A6%AC.md) 
+- class 2 : [:page_facing_up: Type size in Memory](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/C%2B%2B%20Memory%20Model%20Class/C%2B%2B%20Memory%20Model%20-%20Type%20size%20in%20Memory.md)
+
