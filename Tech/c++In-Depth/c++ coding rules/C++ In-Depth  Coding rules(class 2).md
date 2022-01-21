@@ -107,6 +107,7 @@
    - c 값이 범위를 벗어났을 경우를 대비한 default 구문을 넣어 오류 제거
 
    ```c++
+   #include <cassert> // cassert header include!
    int func(Color c){
        switch(c){
            case Red: return 2;
