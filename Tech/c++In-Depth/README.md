@@ -15,6 +15,7 @@
   3. [자동화된 빌드 시스템을 사용하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%203).md)
   4. [버전 컨트롤 시스템을 사용하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%204).md)
   5. [코드 리뷰에 시간을 투자하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%205).md)
+  6. [하나의 엔티티에는 하나의 역할만을 부여하자](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%206).md)
   
   
 
