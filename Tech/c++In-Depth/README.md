@@ -22,6 +22,8 @@
 
 - class 8 : [:page_facing_up: vector의 push_back과 std의 move 활용](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/vector%EC%9D%98push_back%EA%B3%BC%20std%EC%9D%98%20move.md)
 
+- class 9 : [:page_facing_up: memory header의 allocator class](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/Memory%20%ED%97%A4%EB%8D%94%EC%9D%98%20allocator%20class.md)
+
 - class 9 : :page_facing_up: Coding rules
   1. [작은 것에 연연하지 말라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20%20Coding%20rules(class%201).md)
   2. [사소한 경고 메시지라도 무시하지 말라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20%20Coding%20rules(class%202).md)
