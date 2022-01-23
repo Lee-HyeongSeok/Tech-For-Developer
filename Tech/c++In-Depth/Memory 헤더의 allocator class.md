@@ -143,3 +143,10 @@ void uninitialized_fill(For, For, const T&);
 
     >  **[first, last) 범위의 모든 요소에 const T&로 주어진 값으로 채운다.**
 
+***
+
+<br>
+
+### :round_pushpin: 출처
+
+[[1] 티스토리](https://woo-dev.tistory.com/51)
