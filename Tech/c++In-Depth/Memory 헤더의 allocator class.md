@@ -85,7 +85,7 @@ template <class For, class T>
 void uninitialized_fill(For, For, const T&);
 ```
 
-- **T* allocate(size_t)**
+- **T\* allocate(size_t)**
 
   - 인자로 생성할 T 객체의 개수(n)를 받는다.
 
@@ -99,7 +99,7 @@ void uninitialized_fill(For, For, const T&);
     >
     > **(8bytes * 5) + 4bytes = 44bytes**
 
-- **void deallocate(T*, size_t)**
+- **void deallocate(T\*, size_t)**
 
   - allocate() 함수로 할당했던 메모리 공간을 해제하는 함수
   - 인자로 **T type 포인터**와 **개수**를 받는다.
@@ -107,14 +107,14 @@ void uninitialized_fill(For, For, const T&);
     - 개수 : allocate()로 전달했던 개수
     - **cppreference에서는 allocate()로 전달했던 개수와 동일해야 한다고 말함**
 
-- **void construct(T*, const T&)**
+- **void construct(T\*, const T\&)**
 
   - 초기화 되지 않은 공간에 요소를 저장하는 함수
   - T type 포인터와 객체를 인자로 전달 받으며, 포인터가 가리키는 위치에 객체를 저장
   - 초기화 되지 않은 공간에 \*(간접 참조)연산자를 사용하여 값을 대입할 경우 에러 발생
     - **하지만 이 함수를 통해 에러 없이 저장 가능**
 
-- **void destroy(T*)**
+- **void destroy(T\*)**
 
   - 객체를 소멸시키는 함수
   - T type 포인터가 가리키는 위치에 존재하는 객체의 소멸자를 호출
