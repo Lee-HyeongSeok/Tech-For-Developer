@@ -30,6 +30,7 @@
   5. [코드 리뷰에 시간을 투자하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%205).md)
   6. [하나의 엔티티에는 하나의 역할만을 부여하자](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%206).md)
   7. [정확성, 간결성, 명확성을 먼저 생각하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%207).md)
+  8. [적절한 규모 유지를 위해서는 'When', 'How'를 아는 것이 중요하다](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%208).md)
   
   
 
