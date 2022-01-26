@@ -105,4 +105,5 @@
 - class 2 : [:page_facing_up: Type size in Memory](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/C%2B%2B%20Memory%20Model%20Class/C%2B%2B%20Memory%20Model%20-%20Type%20size%20in%20Memory.md)
 - class 3 : [:page_facing_up: malloc, realloc, new](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/C%2B%2B%20Memory%20Model%20Class/C%2B%2B%20Memory%20Model%20%20malloc%2C%20realloc%2C%20new.md)
 - class 4 :  [:page_facing_up: static_assert의 사용](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/C%2B%2B%20Memory%20Model%20Class/C%2B%2B%20Memory%20Model%20static_assert%EC%9D%98%20%EC%82%AC%EC%9A%A9.md)
+- class 5 : [:page_facing_up: 구조체와 메모리](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/C%2B%2B%20Memory%20Model%20Class/C%2B%2B%20Memory%20Model%20%EA%B5%AC%EC%A1%B0%EC%B2%B4%EC%99%80%20%EB%A9%94%EB%AA%A8%EB%A6%AC.md)
 
