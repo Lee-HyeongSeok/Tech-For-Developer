@@ -32,3 +32,5 @@
 - class 10 : :page_facing_up: C++ In-Depth
   1. [C++ 프로그램의 작성법](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B1%5DC%2B%2B%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%98%20%EC%9E%91%EC%84%B1%EB%B2%95.md)
   2. [데이터 객체의 정의와 초기화](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B2%5D%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EA%B0%9D%EC%B2%B4(data%20object)%EC%9D%98%20%EC%A0%95%EC%9D%98(definition)%EC%99%80%20%EC%B4%88%EA%B8%B0%ED%99%94.md)
+  3. [문자 리터럴(literal)과 특별 기호(escape sequences)](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B3%5D%EB%AC%B8%EC%9E%90%20%EB%A6%AC%ED%84%B0%EB%9F%B4(literal)%EA%B3%BC%20%ED%8A%B9%EB%B3%84%20%EA%B8%B0%ED%98%B8.md)
+  4. [표현식(Expression)](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B4%5D%ED%91%9C%ED%98%84%EC%8B%9D(Expression).md)
