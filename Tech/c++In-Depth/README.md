@@ -34,4 +34,7 @@
   2. [데이터 객체의 정의와 초기화](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B2%5D%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EA%B0%9D%EC%B2%B4(data%20object)%EC%9D%98%20%EC%A0%95%EC%9D%98(definition)%EC%99%80%20%EC%B4%88%EA%B8%B0%ED%99%94.md)
   3. [문자 리터럴(literal)과 특별 기호(escape sequences)](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B3%5D%EB%AC%B8%EC%9E%90%20%EB%A6%AC%ED%84%B0%EB%9F%B4(literal)%EA%B3%BC%20%ED%8A%B9%EB%B3%84%20%EA%B8%B0%ED%98%B8.md)
   4. [표현식(Expression)](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B4%5D%ED%91%9C%ED%98%84%EC%8B%9D(Expression).md)
-  5. [배열(Array)과 벡터(Vector)]
+  5. [배열(Array)과 벡터(Vector)](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B5%5D%EB%B0%B0%EC%97%B4(Array)%EA%B3%BC%20%EB%B2%A1%ED%84%B0(vector).md)
+  6. [포인터(Pointer)의 유연성(Flexibility)](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B6%5D%ED%8F%AC%EC%9D%B8%ED%84%B0(Pointer)%EC%9D%98%20%EC%9C%A0%EC%97%B0%EC%84%B1(Flexibility).md)
+  7. [파일 읽기와 쓰기](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B7%5D%ED%8C%8C%EC%9D%BC%20%EC%9D%BD%EA%B8%B0%EC%99%80%20%EC%93%B0%EA%B8%B0.md)
+  8. [함수의 작성](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B8%5D%ED%95%A8%EC%88%98%EC%9D%98%20%EC%9E%91%EC%84%B1.md)
