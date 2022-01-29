@@ -29,6 +29,186 @@
 
 <br>
 
+### :pushpin: C++ 스마트 포인터(smart pointer)
+
+> **포인터처럼 동작하는 클래스 템플릿**
+>
+> :point_right: **사용이 끝난 메모리를 자동으로 해제**
+
+- C++ 프로그램에서 new 연산자를 사용하여 동적으로 할당받은 메모리는, 반드시 delete 연산자를 사용하여 해제해야 한다.
+- C++에서는 메모리 누수(Memory leak)로부터 프로그램의 안전성을 보장하기 위해 스마트 포인터를 제공하고 있다.
+
+<br>
+
+### :pushpin: 스마트 포인터의 동작
+
+> **new 연산자가 반환하는 동적 할당된 메모리의 주소값을 스마트 포인터에 대입하면, 따로 메모리를 해제할 필요가 없어진다.**
+
+- **new 연산자**를 사용해 **기본 포인터(raw pointer)**가 실제 메모리를 가리키도록 초기화한 후에, 기본 포인터를 스마트 포인터에 대입하여 사용
+- 정의된 스마트 포인터의 수명이 다하면, 소멸자는 **delete 연산자**를 사용하여 할당된 메모리를 자동으로 해제
+
+<br>
+
+### :pushpin: 스마트 포인터의 종류(C++ 11 부터 제공)
+
+1. std::unique_ptr
+2. std::shared_ptr
+3. std::weak_ptr
+4. std::auto_ptr(C++11 표준부터 삭제되었다)
+
+<br>
+
+### :pushpin: std::unique_ptr이란?
+
+- **하나의 스마트 포인터만이 특정 객체를 소유할 수 있도록**, 객체에 소유권 개념을 도입한 스마트 포인터
+
+- 해당 객체의 소유권을 가지고 있을 때만, 소멸자가 해당 객체를 삭제할 수 있다.
+
+- 보통의 C++ 객체에 대해 스마트 포인터가 필요한 상황에서는 주로 std::unique_ptr을 사용하면 된다.
+
+- std::unique_ptr 인스턴스는 std::move() 멤버 함수를 통해 **소유권을 이전할 수 있지만, 복사 불가**
+
+  >  :point_down: 소유권이 이전되면, 이전 std::unique_ptr 인스턴스는 더는 해당 객체를 소유하지 않게 재설정된다.
+  >
+  > ```c++
+  > int *raw_ptr = new int[100]; // 기본 포인터 동적 할당
+  > std::unique_ptr<int> u_ptr(raw_ptr); // int형 unique_ptr인 u_ptr을 선언하고 초기화
+  > 
+  > std::unique_ptr<int> new_u_ptr = std::move(u_ptr); // u_ptr에서 new_u_ptr로 소유권 이전
+  > /* std::unique_ptr<int> new_u_ptr = u_ptr; 대입 연산자를 이용한 복사는 오류 발생 */
+  > new_u_ptr.reset(); // new_u_ptr이 가리키는 메모리 영역 삭제
+  > u_ptr.reset(); // u_ptr이 가리키는 메모리 영역 삭제
+  > ```
+
+- **C++14 이후부터 제공되는** make_unique() 함수를 사용하면 std::unique_ptr 인스턴스를 안전하게 생성 가능
+
+  > [1] make_unique() 함수는 전달받은 인수를 사용해 지정된 타입의 객체를 생성하고, 생성된 객체를 가리키는 unique_ptr을 반환한다.
+  >
+  > [2] 이 함수를 사용하면, 예외 발생에 대해 안전하게 대처 가능(컴파일러에 의해 제어될 수 있는 자원 할당과 같은)
+  >
+  > ```c++
+  > #include <iostream>
+  > #include <memory>
+  > #include <string>
+  > using namespace std;
+  > 
+  > class Person{
+  > private:
+  >     string name;
+  >     int age;
+  > public:
+  >     Person(const string& name, int age);
+  >     ~Person(){ cout<<"destructor call"<<endl; }
+  >     void ShowPersonInfo();
+  > }
+  > 
+  > int main(void){
+  >     /* [1] make_unique() 함수 : 전달받은 인수를 사용해 지정된 타입의 객체 생성 후, 생성된 객체를 가리키는 unique_ptr을 반환
+  >        [2] 기본 포인터(raw pointer)와 달리 unique_ptr 인스턴스인 p_ptr은 사용이 끝난 후 delete 연산자를 사용하여 메모리를 해제할 필요가 없다.
+  >     */
+  >     unique_ptr<Person> p_ptr = make_unique<Person>("Lee", 26);
+  >     p_ptr->ShowPersonInfo();
+  >     return 0;
+  > }
+  > 
+  > Person::Person(const string& name, int age){
+  >     this->name = name;
+  >     this->age = age;
+  >     cout<<"constructor call"<<endl;
+  > }
+  > 
+  > void Person::ShowPersonInfo(){ cout<<name<<age<<endl; }
+  > ```
+
+<br>
+
+### :pushpin: std::shared_ptr이란?
+
+- 하나의 특정 객체를 참조하는 스마트 포인터가 총 몇 개인지를 참조하는 스마트 포인터
+
+  > **참조하고 있는 스마트 포인터의 개수를 참조 횟수(reference count)라고 한다.**
+
+- **참조 횟수**는 특정 객체에 새로운 shared_ptr이 추가될 때마다 1씩 증가, 수명이 다할 때마다 1씩 감소
+
+- 마지막 std::shared_ptr의 수명이 다하여, 참조 횟수가 0이 되면 delete 연산자를 사용하여 메모리를 자동으로 해제
+
+  > ```c++
+  > int *raw_ptr = new int[5]; // 기본 포인터 동적 할당 선언
+  > 
+  > std::shared_ptr<int> s_ptr(raw_ptr); // int형 shared_ptr인 s_ptr을 선언하고 초기화
+  > cout<< s_ptr.use_count() <<endl; // 1
+  > 
+  > std::shared_ptr<int> new_s_ptr1(s_ptr); // 복사 생성자를 이용한 초기화
+  > cout<< s_ptr.use_count() <<endl; // 2, 현재 s_ptr과 new_s_ptr1이 raw_ptr 리소스 참조 중
+  > 
+  > std::shared_ptr<int> new_s_ptr2(s_ptr); // 대입 연산자를 이용한 초기화
+  > cout<< s_ptr.use_count() <<endl; // 3, 현재 s_ptr과 new_s_ptr1, new_s_ptr2가 raw_ptr 리소스 참조중
+  > 
+  > new_s_ptr2.reset(); // shared_ptr인 new_s_ptr2를 해제함.
+  > cout<< s_ptr.use_count() <<endl; // 2, 현재 s_ptr, new_s_ptr1이 raw_ptr 리소스 참조중
+  > ```
+  >
+  > :point_right: use_count() 멤버 함수는 shared_ptr 객체가 현재 가리키고 있는 리소스를 참조 중인 소유자의 수를 반환해준다.
+
+- make_shared() 함수를 사용하면 shared_ptr 인스턴스를 안전하게 생성 가능
+
+  > [1] make_shared() 함수는 전달받은 인수를 사용해 지정된 타입의 객체를 생성하고, 생성된 객체를 가리키는 std::shared_ptr을 반환한다.
+  >
+  > [2] 이 함수를 사용하면 예외 발생에 대해 안전하게 대처할 수 있다.
+  >
+  > ```c++
+  > #include <iostream>
+  > #include <memory>
+  > #include <string>
+  > using namespace std;
+  > 
+  > class Person{
+  > private:
+  >     string name;
+  >     int age;
+  > public:
+  >     Person(const string& name, int age);
+  >     ~Person(){ cout<<"destructor call"<<endl; }
+  >     void ShowPersonInfo();
+  > }
+  > 
+  > int main(void){
+  >     shared_ptr<Person> origin_shared_ptr = make_shared<Person>("Lee", 26);
+  >     cout<<"현재 Person(Lee, 26) 리소스 소유자 수 : "<<origin_shared_ptr.use_count()<<endl; // 1
+  >     
+  >     shared_ptr<Person> new_shared_ptr1(origin_shared_ptr); // 복사 생성자를 사용한 초기화
+  >     cout<<"현재 Person(Lee, 26) 리소스 소유자 수 : "<<origin_shared_ptr.use_count()<<endl; // 2
+  >     
+  >     new_shared_ptr1.reset(); // shared_ptr인 new_shared_ptr1을 해제함.
+  >     cout<<"현재 Person(Lee, 26) 리소스 소유자 수 : "<<origin_shared_ptr.use_count()<<endl;
+  >     return 0;
+  > }
+  > 
+  > Person::Person(const string& name, int age){
+  >     this->name = name;
+  >     this->age = age;
+  >     cout<<"constructor call"<<endl;
+  > }
+  > 
+  > void Person::ShowPersonInfo(){
+  >     cout<<name<<age<<endl;
+  > }
+  > ```
+
+<br>
+
+### :pushpin: std::weak_ptr이란?
+
+- 하나 이상의 std::shared_ptr 인스턴스가 소유하는 객체에 대한 접근을 제공하지만, 소유자의 수에는 포함되지 않는 스마트 포인터
+
+  > [1] std::shared_ptr은 참조 횟수(reference count)를 기반으로 동작하는 스마트 포인터
+  >
+  > [2] 만약 서로가 상대방을 가리키는 shared_ptr를 가지고 있다면, 참조 횟수는 절대 0이 되지 않으므로 메모리는 영원히 해제되지 않는다(순환 참조, circular reference)
+  >
+  > [3] weak_ptr은 이러한 shared_ptr 인스턴스 사이의 순환 참조를 제거하기 위해 사용된다.
+
+<br>
+
 ### :pushpin: std::unique_ptr의 RAII 예시
 
 ```c++
@@ -131,9 +311,9 @@ void func(){
 
 - 원본 자원을 개체가 가지게 하자.
 
-  - 원시 포인터(raw pointer) 대신에 스마트 포인터(smart pointer)를 사용해서 자원의 할당이 동적으로 이루어지게 한다.
+  - **원시 포인터(raw pointer)** 대신에 **스마트 포인터(smart pointer)**를 사용해서 자원의 할당이 동적으로 이루어지게 한다.
 
-  - 모든 직접적인 자원 할당(new 연산자와 같은)이 내부의 구문 내에서 실행되도록 하여, 할당된 자원이 관리 개체(shared_ptr과 같은)로 전달되도록 해야 한다.
+  - 모든 직접적인 자원 할당(new 연산자와 같은)이 내부의 구문 내에서 실행되도록 하여, **할당된 자원이 관리 개체(shared_ptr과 같은)로 전달되도록 해야 한다.**
 
     > **함수 인자의 실행 순서가 정해지지 않았기 때문에 자원 누출 가능**
     >
