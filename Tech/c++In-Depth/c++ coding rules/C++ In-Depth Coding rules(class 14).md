@@ -70,15 +70,19 @@
 
   >  :point_down: 소유권이 이전되면, 이전 std::unique_ptr 인스턴스는 더는 해당 객체를 소유하지 않게 재설정된다.
   >
-  > ```c++
-  > int *raw_ptr = new int[100]; // 기본 포인터 동적 할당
-  > std::unique_ptr<int> u_ptr(raw_ptr); // int형 unique_ptr인 u_ptr을 선언하고 초기화
-  > 
-  > std::unique_ptr<int> new_u_ptr = std::move(u_ptr); // u_ptr에서 new_u_ptr로 소유권 이전
-  > /* std::unique_ptr<int> new_u_ptr = u_ptr; 대입 연산자를 이용한 복사는 오류 발생 */
-  > new_u_ptr.reset(); // new_u_ptr이 가리키는 메모리 영역 삭제
-  > u_ptr.reset(); // u_ptr이 가리키는 메모리 영역 삭제
-  > ```
+  >  ```c++
+  >  int *raw_ptr = new int[100]; // 기본 포인터 동적 할당
+  >  std::unique_ptr<int> u_ptr(raw_ptr); // int형 unique_ptr인 u_ptr을 선언하고 초기화
+  >  
+  >  /* 오류가 나는 부분
+  >  std::unique_ptr<int> new_u_ptr1(u_ptr); 복사 생성자를 사용한 초기화
+  >  std::unique_ptr<int> new_u_ptr2 = u_ptr; 대입 연산자를 사용한 초기화
+  >  */
+  >  std::unique_ptr<int> new_u_ptr = std::move(u_ptr); // u_ptr에서 new_u_ptr로 소유권 이전
+  >  /* std::unique_ptr<int> new_u_ptr = u_ptr; 대입 연산자를 이용한 복사는 오류 발생 */
+  >  new_u_ptr.reset(); // new_u_ptr이 가리키는 메모리 영역 삭제
+  >  u_ptr.reset(); // u_ptr이 가리키는 메모리 영역 삭제
+  >  ```
 
 - **C++14 이후부터 제공되는** make_unique() 함수를 사용하면 std::unique_ptr 인스턴스를 안전하게 생성 가능
 
@@ -124,11 +128,19 @@
 
 ### :pushpin: std::shared_ptr이란?
 
+![Untitled Diagram drawio](https://user-images.githubusercontent.com/55940552/151687284-95b14e0b-b3f5-4925-843c-8f6d8e7bc015.png) 
+
+<br>
+
 - 하나의 특정 객체를 참조하는 스마트 포인터가 총 몇 개인지를 참조하는 스마트 포인터
 
   > **참조하고 있는 스마트 포인터의 개수를 참조 횟수(reference count)라고 한다.**
 
 - **참조 횟수**는 특정 객체에 새로운 shared_ptr이 추가될 때마다 1씩 증가, 수명이 다할 때마다 1씩 감소
+
+- std::shared_ptr 들은 제어 블록(control block)을 동적으로 할당한 후, shared_ptr들이 이 제어 블록에 필요한 정보를 공유하는 방식으로 구현된다(참조 횟수 등의 정보를 공유)
+
+  > **std::shared_ptr은 복사 생성할 때마다 해당 제어 블록의 위치만 공유, 소멸할 때마다 제어 블록의 참조 횟수를 하나씩 감소, 생성할 때마다 하나씩 증가**
 
 - 마지막 std::shared_ptr의 수명이 다하여, 참조 횟수가 0이 되면 delete 연산자를 사용하여 메모리를 자동으로 해제
 
@@ -152,9 +164,11 @@
 
 - make_shared() 함수를 사용하면 shared_ptr 인스턴스를 안전하게 생성 가능
 
-  > [1] make_shared() 함수는 전달받은 인수를 사용해 지정된 타입의 객체를 생성하고, 생성된 객체를 가리키는 std::shared_ptr을 반환한다.
+  > [1] make_shared() 함수는 전달받은 인수를 사용해 지정된 타입의 객체를 생성하고, 생성된 객체를 가리키는 std::shared_ptr을 반환한다**(지정된 타입의 크기와 shared_ptr의 제어 블록 크기를 합친 크기로 한 번에 할당한다)**
   >
   > [2] 이 함수를 사용하면 예외 발생에 대해 안전하게 대처할 수 있다.
+  >
+  > [3] 일반적인 shared_ptr은 가리키는 객체의 동적 할당, shared_ptr의 제어 블록 동적 할당이 2번 일어나지만, make_shared() 함수를 사용하면 한 번으로 통일된다.
   >
   > ```c++
   > #include <iostream>
@@ -164,36 +178,202 @@
   > 
   > class Person{
   > private:
-  >     string name;
-  >     int age;
+  >  string name;
+  >  int age;
   > public:
-  >     Person(const string& name, int age);
-  >     ~Person(){ cout<<"destructor call"<<endl; }
-  >     void ShowPersonInfo();
+  >  Person(const string& name, int age);
+  >  ~Person(){ cout<<"destructor call"<<endl; }
+  >  void ShowPersonInfo();
   > }
   > 
   > int main(void){
-  >     shared_ptr<Person> origin_shared_ptr = make_shared<Person>("Lee", 26);
-  >     cout<<"현재 Person(Lee, 26) 리소스 소유자 수 : "<<origin_shared_ptr.use_count()<<endl; // 1
-  >     
-  >     shared_ptr<Person> new_shared_ptr1(origin_shared_ptr); // 복사 생성자를 사용한 초기화
-  >     cout<<"현재 Person(Lee, 26) 리소스 소유자 수 : "<<origin_shared_ptr.use_count()<<endl; // 2
-  >     
-  >     new_shared_ptr1.reset(); // shared_ptr인 new_shared_ptr1을 해제함.
-  >     cout<<"현재 Person(Lee, 26) 리소스 소유자 수 : "<<origin_shared_ptr.use_count()<<endl;
-  >     return 0;
+  >  shared_ptr<Person> origin_shared_ptr = make_shared<Person>("Lee", 26);
+  >  cout<<"현재 Person(Lee, 26) 리소스 소유자 수 : "<<origin_shared_ptr.use_count()<<endl; // 1
+  > 
+  >  shared_ptr<Person> new_shared_ptr1(origin_shared_ptr); // 복사 생성자를 사용한 초기화
+  >  cout<<"현재 Person(Lee, 26) 리소스 소유자 수 : "<<origin_shared_ptr.use_count()<<endl; // 2
+  > 
+  >  new_shared_ptr1.reset(); // shared_ptr인 new_shared_ptr1을 해제함.
+  >  cout<<"현재 Person(Lee, 26) 리소스 소유자 수 : "<<origin_shared_ptr.use_count()<<endl;
+  >  return 0;
   > }
   > 
   > Person::Person(const string& name, int age){
-  >     this->name = name;
-  >     this->age = age;
-  >     cout<<"constructor call"<<endl;
+  >  this->name = name;
+  >  this->age = age;
+  >  cout<<"constructor call"<<endl;
   > }
   > 
   > void Person::ShowPersonInfo(){
-  >     cout<<name<<age<<endl;
+  >  cout<<name<<age<<endl;
   > }
   > ```
+
+<br>
+
+### :pushpin: std::shared_ptr 생성 시 주의할 점
+
+- std::shared_ptr은 인자로 주소값이 전달되면, 자신이 해당 객체를 첫 번째로 소유하는 것처럼 행동한다**(서로 다른 제어 블록을 가진다)**
+
+  > ```c++
+  > A * a = new A(); // raw pointer
+  > std::shared_ptr<A> s_ptr1(a); // a의 주소값을 shared_ptr에 전달
+  > std::shared_ptr<A> s_ptr2(a); // a의 주소값을 shared_ptr에 전달
+  > ```
+  >
+  > ![Untitled Diagram drawio (1)](https://user-images.githubusercontent.com/55940552/151687345-c06c5bba-e7eb-4d60-a54b-c97eee602ea4.png) 
+  >
+  > <br>
+  >
+  > :point_right: **s_ptr1이 소멸된다면, 참조 횟수가 0이 되어 자신이 가리키는 new int[100];을 해제(소멸)**
+  >
+  > :point_right: **s_ptr2의 참조 횟수는 계속 1이기 때문에 자신이 가리키는 객체가 살아 있을 것이라 생각**
+  >
+  > - 이때 s_ptr2가 소멸되면 참조 횟수가 0으로 감소되며, 자신이 가리키고 있는 이미 해제된 객체를 소멸시키기 때문에 오류 발생
+  >
+  > :point_right: **따라서 shared_ptr을 주소값을 통해 생성하는 것을 지양해야 한다.**
+
+  <br>
+
+- 객체 내부에서 자기 자신을 가리키는 shared_ptr을 만들 때 오류가 발생하는 경우
+
+  > ```c++
+  > #include <iostream>
+  > #include <memory>
+  > using namespace std;
+  > 
+  > class A{
+  > private:
+  >     int *data;
+  > public:
+  >     A();
+  >     ~A();
+  >     shared_ptr<A> get_shared_ptr();
+  > };
+  > 
+  > int main(void){
+  >     shared_ptr<A> s_ptr1 = make_shared<A>(); // A객체를 가리키는 shared_ptr 생성
+  >     shared_ptr<A> s_ptr2 = s_ptr1->get_shared_ptr(); // A객체를 가리키는 shared_ptr 또 생성
+  >     
+  >     cout<<s_ptr1.use_count()<<endl; // 1
+  >     cout<<s_ptr2.use_count()<<endl; // 1
+  > }
+  > 
+  > A::A(){
+  >     data = new int[100];
+  >     cout<<"call constructor"<<endl;
+  > }
+  > 
+  > A::~A(){
+  >     delete[] data;
+  >     cout<<"call destructor"<<endl;
+  > }
+  > 
+  > public A::shared_ptr<A> get_shared_ptr(){
+  >     return shared_ptr<A>(this);
+  > }
+  > ```
+  >
+  > :point_right: get_shared_ptr() 함수에서 shared_ptr을 생성할 때, 이미 자기 자신을 가리키는 shared_ptr이 있다는 사실을 모른채 새로운 제어 블록 생성
+  >
+  > :point_right: **이 문제는 enable_shared_from_this를 통해 해결 가능**(enable_shared_from_this를 상속받아 사용)
+  >
+  > ```c++
+  > #include <iostream>
+  > #include <memory>
+  > using namespace std;
+  > 
+  > class A : public enable_shared_from_this<A>{
+  > private:
+  >     int *data;
+  > public:
+  >     A();
+  >     ~A();
+  >     shared_ptr<A> get_shared_ptr();
+  > };
+  > int main(void){
+  > 	shared_ptr<A> s_ptr1 = make_shared<A>();
+  >     shared_ptr<A> s_ptr2 = s_ptr1->get_shared_ptr();
+  >     
+  >     cout<<s_ptr1.use_count()<<endl; // 2
+  >     cout<<s_ptr2.use_count()<<endl; // 2
+  > }
+  > ```
+  >
+  > :point_right: enable_shared_from_this가 잘 동작하기 위해서는 해당 객체의 shared_ptr이 반드시 먼저 정의되어 있어야 한다.
+  >
+  > :point_right: enable_shared_from_this는 제어 블록을 확인만 할 뿐, 없는 제어 블록을 생성하지 않기 때문
+  >
+  > ```c++
+  > A * a = new A();
+  > shared_ptr<A> s_ptr = a->get_shared_ptr(); // 오류 발생
+  > ```
+
+<br>
+
+### :pushpin: std::shared_ptr의 순환 참조(Circular Reference)
+
+> **순환 참조란?**
+>
+> shared_ptr은 참조 횟수가 0이 되면 자동으로 가리키는 객체를 메모리에서 해제 시킨다.
+>
+> 이때 객체들을 더 이상 사용하지 않음에도 불구하고 참조 횟수가 0이 될 수 없는 상황이 발생하는 것을 순환 참조라 한다.
+>
+> :point_down: **예제**
+>
+> ```c++
+> #include <iostream>
+> #include <memory>
+> using namespace std;
+> 
+> class A{
+> private:
+>     int *data;
+>     shared_ptr<A> other;
+> public:
+>     A();
+>     ~A();
+>     void set_other(shared_ptr<A> other);
+> };
+> 
+> int main(void){
+>     shared_ptr<A> s_ptr1 = make_shared<A>();
+>     shared_ptr<A> s_ptr2 = make_shared<A>();
+>     
+>     // 순환 참조 전 각 객체는 자신을 가리키는 shared_ptr을 하나 씩 가지고 있다.
+>     cout<<"순환 참조 전 참조 횟수 : "<<s_ptr1.use_count()<<endl; // 1
+>     cout<<"순환 참조 전 참조 횟수 : "<<s_ptr2.use_count()<<endl; // 1
+>     
+>     s_ptr1->set_other(s_ptr2);
+>     s_ptr2->set_other(s_ptr1);
+>     
+>     // 순환 참조 후 각 shared_ptr은 다른 객체를 가리키므로 참조 횟수가 1씩 증가
+>     cout<<"순환 참조 후 참조 횟수 : "<<s_ptr1.use_count()<<endl; // 2
+>     cout<<"순환 참조 후 참조 횟수 : "<<s_ptr2.use_count()<<endl; // 2
+> }
+> A::A(){
+>     data = new int[5];
+>     cout<<"call constructor"<<endl;
+> }
+> 
+> A::~A(){
+>     delete[] data;
+>     cout<<"call destructor"<<endl;
+> }
+> void A::set_other(shared_ptr<A> other){
+>     this->other = other;
+> }
+> ```
+>
+> :point_right: 각 객체는 shared_ptr을 하나 씩 가지고 있지만, shared_ptr이 서로 다른 객체를 가리키고 있다.
+>
+> - s_ptr1의 shared_ptr은 s_ptr2를 가리키고 있고, s_ptr2의 shared_ptr은 s_ptr1을 가리키고 있다.
+> - **s_ptr1의 객체가 소멸되기 위해서는** s_ptr1의 객체를 가리키고 있는 shared_ptr의 참조 횟수가 0이 되어야 한다(즉, s_ptr2의 객체가 소멸되어야 한다)
+> - **s_ptr2의 객체가 소멸되기 위해서는** s_ptr2의 객체를 가리키고 있는 shared_ptr의 참조 횟수가 0이 되어야 한다(즉, s_ptr1의 객체가 소멸되어야 한다)
+>
+> :point_right: **따라서 위의 예제는 소멸자를 둘다 호출하지 못한다.**
+>
+> ![Untitled Diagram drawio (2)](https://user-images.githubusercontent.com/55940552/151691389-3e05a4c7-16f4-4fd7-945e-0a0e7b900a70.png) 
 
 <br>
 
@@ -206,6 +386,119 @@
   > [2] 만약 서로가 상대방을 가리키는 shared_ptr를 가지고 있다면, 참조 횟수는 절대 0이 되지 않으므로 메모리는 영원히 해제되지 않는다(순환 참조, circular reference)
   >
   > [3] weak_ptr은 이러한 shared_ptr 인스턴스 사이의 순환 참조를 제거하기 위해 사용된다.
+
+<br>
+
+### :pushpin: std::shared_ptr의 순환 참조를 해결하는 std::weak_ptr
+
+- 하나의 부모 노드와 여러 개의 자식 노드가 존재할 때
+
+  > ```c++
+  > class Node{
+  > private:
+  >     std::vector<std::shared_ptr<Node>> children;
+  >     /* 어떤 타입이 와야 하는가? */ parent;
+  > public:
+  >     Node(){ };
+  >     void add_children_node(std::shared_ptr<Node> node){
+  >         children.push_back(node);
+  >     }
+  > }
+  > ```
+  >
+  > :point_right: 부모가 여러 개의 자식 노드들을 가지므로 shared_ptr 들의 벡터로 나타냄
+  >
+  > :point_right: 해당 노드 역시 부모 노드를 가지므로 부모 노드를 가리키는 포인터를 가진다.
+  >
+  > <br>
+  >
+  > **parent 객체는 어떤 포인터 타입을 사용해야 하는가?**
+  >
+  > 1. 일반 포인터(Node *) : 메모리 해제 실수의 위험성 또는 예외 발생 가능성으로 안전성 감소
+  > 2. shared_ptr : 순환 참조 문제 발생, 부모와 자식이 서로를 가리키기 때문에 참조 횟수가 절대로 0이 될 수 없다(프로그램의 실행이 종료될 때까지 소멸되지 못하고 남아있는다)
+  >
+  > :point_right: **weak_ptr을 사용하여 이러한 문제를 해결한다.**
+  >
+  > - 스마트 포인터 처럼 객체를 안전하게 참조할 수 있지만, shared_ptr과 다르게 참조 횟수를 증가시키지 않는다.
+  > - 어떤 객체를 weak_ptr이 가리키고 있을 때, 다른 shared_ptr들이 가리키고 있지 않다면 메모리에서 소멸된다.
+  > - **weak_ptr 자체로는 원래 객체 참조 불가, shared_ptr로 변환하여 사용해야 한다.**
+  >   - 가리키는 객체가 이미 소멸되었다면, 빈 shared_ptr로 변환
+  >   - 가리키는 객체가 소멸되있지 않다면, 해당 객체를 가리키는 shared_ptr로 변환
+  >
+  > <br>
+  >
+  > :point_down: 해결 예시
+  >
+  > ```c++
+  > #include <iostream>
+  > #include <memory>
+  > #include <string>
+  > #include <vector>
+  > using namespace std;
+  > 
+  > class A{
+  > private:
+  >     string s;
+  >     weak_ptr<A> other;
+  > public:
+  >     A(const string& s);
+  >     ~A();
+  >     void set_other(weak_ptr<A> other);
+  >     void access_other();
+  >     string name();
+  > };
+  > 
+  > int main(void){
+  >     vector<shared_ptr<A>> vec; // shared_ptr을 담는 vector 선언
+  >     vec.push_back(make_shared<A>("resource 1"));  // shared_ptr 선언과 동시에 vector에 삽입
+  >     vec.push_back(make_shared<A>("resource 2"));
+  >     
+  >     // set_other()는 weak_ptr<A>를 인자로 받고 있지만, shared_ptr을 전달
+  >     // weak_ptr은 생성자로 shared_ptr이나 다른 weak_ptr을 받는다.
+  >     // shared_ptr과 다르게, 이미 제어 블록이 만들어진 객체만이 의미를 가지기 때문에 평범한 주소값으로 weak_ptr을 생성할 수 없다.
+  >     vec[0]->set_other(vec[1]);
+  >     vec[1]->set_other(vec[0]);
+  >     
+  >     cout<<"vec[0] reference count : "<<vec[0].use_count()<<endl;
+  >     cout<<"vec[1] reference count : "<<vec[1].use_count()<<endl;
+  >     
+  >     vec[0]->access_other(); // weak_ptr로 해당 객체 접근
+  >     
+  >     vec.pop_back(); // 벡터 마지막 원소 제거(vec[1] 소멸)
+  >     vec[0]->access_other(); // 접근 실패, 위에서 vec[1]의 shared_ptr이 vec[0]이 가리키는 객체를 가리키게 했기 때문
+  > }
+  > 
+  > A::A(const string& s){
+  >     this->s = s;
+  >     cout<<"call constructor, get resource"<<endl;
+  > }
+  > 
+  > A::~A(){
+  >     cout<<"call destructor"<<endl;
+  > }
+  > 
+  > void A::set_other(weak_ptr<A> other){
+  >     this->other = other; 
+  > }
+  > 
+  > void A::access_other(){
+  >     // weak_ptr 자체로는 그 객체(원소)를 참조할 수 없으므로 shared_ptr로 변환하여 사용
+  >     // weak_ptr의 lock() 함수는 weak_ptr이 가리키는 객체가 메모리에 살아있다면(참조 횟수가 0이 아니면) 해당 객체를 가리키는 shared_ptr을 반환, 이미 해제되어 있다면 아무것도 가리키지 않는 shared_ptr을 반환
+  > 	shared_ptr<A> o = this->other.lock(); 
+  >     if(o){ // 아무것도 가리키지 않는 shared_ptr은 false로 형변환 되므로 if문으로 간단히 확인 가능
+  >         cout<<"access : "<<o->name()<<endl; // weak_ptr로 해당 객체에 접근
+  >     }
+  >     else{
+  >         cout<<"already accessed"<<endl;
+  >     }
+  > }
+  > 
+  > string A::name(){
+  >     return this->s;
+  > }
+  > ```
+  >
+  > 
 
 <br>
 
