@@ -77,16 +77,16 @@
 
 - [2] 상등 연산자(==)가 적용될 수 있는 모든 타입에 대해 동작하도록 만드는 과정
 
-> ```c++
-> template <typename elemType>
-> elemType* find(const vector<elemType> &vec, const elemType &value){
->     for(int ix=0; ix<vec.size(); ++ix){
->         if(vec[ix] == value)
->             return &vec[ix];
->     }
->     return 0;
-> }
-> ```
+  > ```c++
+  > template <typename elemType>
+  > elemType* find(const vector<elemType> &vec, const elemType &value){
+  >  for(int ix=0; ix<vec.size(); ++ix){
+  >      if(vec[ix] == value)
+  >          return &vec[ix];
+  >  }
+  >  return 0;
+  > }
+  > ```
 
 - [3] find() 가 벡터는 물론, 상등 연산자가 정의된 모든 타입의 요소에 대한 배열에서도 잘 동작하게 만드는 것
 
