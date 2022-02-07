@@ -416,3 +416,234 @@ int main(void){
 - 사용자가 상등 연산자를 다르게 정의하길 원한다면?
   1. 상등 연산자를 사용하지 않고, 함수의 포인터와 같이 함수를 넘기는 것
   2. 함수 객체(function object)라는 특별한 클래스를 구현하는 것
+
+<br>
+
+### :pushpin: 모든 컨테이너에 대한 공통적인 연산
+
+> 다음의 연산들은 모든 컨테이너 클래스(문자열 클래스)에 대해 공통적이다.
+
+- true, false를 반환하는 상등(==)과 부등(!=) 연산자
+
+- 하나의 컨테이너를 다른 컨테이너로 복사하는 대입 연산자(=)
+
+- 컨테이너의 첫 요소에 대한 반복자를 반환하는 begin|()
+
+- 컨테이너의 마지막 요소에서 하나 지난 주소에 대한 반복자를 반환하는 end()
+
+- 컨테이너에 하나 또는 연속의 요소를 추가하는 insert(), 순차 또는 연관 컨테이너에 따라 다르게 동작
+
+- 컨테이너에서 하나 또는 연속의 요소를 삭제하는 erase(), 순차 또는 연관 컨테이너에 따라 다르게 동작
+
+- 컨테이너가 요소를 갖고 있는지 반환하는 empty()
+
+- 컨테이너가 현재 갖고 있는 요소의 개수를 반환하는 size()
+
+- 모든 요소를 지우는 clear()
+
+  > 위와 같은 연산자들을 사용하는 예시
+  >
+  > ```c++
+  > void comp(vector<int> &v1, vector<int> &v2){
+  >     if(v1 == v2) return; // 두 벡터가 같은가?
+  >     
+  >     if(v1.empty() || v2.empty()) return; // 벡터 중 어느 하나가 비어 있는가?
+  >     
+  >     vector<int> t; // 바로 사용하지 않으면 따로 정의하지 않음
+  >     
+  >     t = v1.size() > v2.size() ? v1 : v2; // t에 더 큰 벡터를 대입
+  >     
+  >     // t를 사용..
+  >     
+  >     t.clear(); // t의 모든 요소를 비운다
+  >     t.empty(); // true 반환
+  >     t.size(); // 0
+  > }
+  > ```
+
+<br>
+
+### :pushpin: 순차 컨테이너(Sequential Container)의 사용
+
+- **순차 컨테이너** : 어떤 한 가지 타입의 요소를 순서화한 모음을 저장한다.
+
+- 벡터와 리스트는 주요한 순차 컨테이너이다.
+
+  - 벡터(vector)
+
+    > [1] 인접하게 연속된 메모리 영역에 요소가 저장된다.
+    >
+    > [2] 임의 접근법(random access)에 효율적이다(ex. 5번째 요소에 접근한 후 17번째에 접근하는 등)
+    >
+    > [3] 요소가 벡터의 시작점부터 고정된 위치에 있다.
+    >
+    > [4] 벡터의 어떤 위치(끝이 아닌)에 요소를 삽입하는 것은 비효율적이다.
+    >
+    > - 삽입된 요소의 오른쪽에 있는 모든 요소는 차례로 한 칸씩 이동(값을 복사)되어져야 하기 때문
+    > - 특정 위치에 있는 벡터 요소를 삭제하는 것도 비효율적이다.
+
+  - 리스트(list)
+
+    > [1] 정방향과 역방향으로 탐색할 수 있게 이중으로 연결된(double-linked) 비인접 메모리를 나타낸다.
+    >
+    > [2] 리스트의 각 요소는 세 개의 필드를 갖습니다.
+    >
+    > [3] 값과 리스트의 앞 요소를 가리키는 후방 포인터, 리스트의 다음 요소를 가리키는 전방 포인터를 가진다.
+    >
+    > [4] 리스트 내에서 어떤 위치에 삽입이나 삭제하는 것은 효율적이다.
+    >
+    > [5] 임의 접근법은 덜 효율적이다(5번 째 요소에 접근하고, 17번 째 요소에 접근하려면 요소들의 포인터들을 통해 전부 탐색해야 한다)
+
+  - 데크(deque)
+
+    > [1] 요소가 인접하게 저장되는 점에서 벡터와 비슷하게 동작한다.
+    >
+    > [2] 첫 요소와 마지막 요소의 삽입과 삭제가 효율적이다.
+
+- 수열의 항을 표현하기 위한 더 적합한 컨테이너는?
+
+  - :point_right: 벡터
+  - 항에 대해서는 많은 임의 접근이 있기 때문
+  - 요소를 삭제할 일이 없기 때문
+  - 항상 벡터의 마지막 항에만 추가되기 때문
+
+- 파일에서 시험 점수를 읽어서 높은 순서로 각 점수를 저장한다고 할 때 적합한 컨테이너는?
+
+  - :point_right: 리스트
+  - 읽어들인 각 점수를 임의의 장소에 삽입하게 되기 때문에
+
+<br>
+
+### :pushpin: 순차 컨테이너 객체를 정의하는 방법
+
+1. 빈 컨테이너를 생성한다
+
+   > ```c++
+   > list<string> slist;
+   > vector<int> ivec;
+   > ```
+
+2. 특정 크기의 컨테이너를 생성(각 요소는 기본값으로 초기화된다)
+
+   > ex) int나 double 같은 기본 산술 타입은 0이 기본값이다.
+   >
+   > ```c++
+   > list<int> ilist(1024);
+   > vector<string> slist(32);
+   > ```
+
+3. 주어진 크기와 각 요소의 초기값으로 컨테이너를 생성
+
+   > ```c++
+   > vector<int> ivec(10, -1);
+   > list<string> slist(16, "unassigned");
+   > ```
+
+4. 요소의 범위를 표시하는 반복자를 제공해서 컨테이너를 생성(이 범위의 요소로 컨테이너가 초기화된다)
+
+   > ```c++
+   > int ia[8] = {1, 1, 2, 3, 5, 8, 13, 21};
+   > vector<int> fib(ia, ia+8);
+   > ```
+
+5. 다른 컨테이너 객체를 제공해서 컨테이너를 생성(생성되는 컨테이너는 제공된 컨테이너를 복사함으로써 초기화된다)
+
+   > ```c++
+   > list<string> slist; // 빈 컨테이너
+   > list<string> slist2(slist); // slist를 slist2에 복사
+   > ```
+
+<br>
+
+### :pushpin: 컨테이너의 삽입, 삭제 연산
+
+- 벡터
+  - push_back() : 마지막 요소에 삽입한다.
+  - pop_back() : 마지막 요소를 삭제한다.
+- 리스트, 데크
+  - push_front(), push_back() : 첫 번째 요소에 값을 삽입한다, 마지막 요소에 값을 삽입한다.
+  - pop_front(), pop_back() : 첫 번째 요소에 값을 삭제한다, 마지막 요소에 값을 삭제한다(값을 반환하지 않는다)
+
+<br>
+
+### :pushpin: insert() 연산자의 네 가지 변화형
+
+1. iterator insert(iterator position, elemType value)
+
+   > [1] position 앞에 value를 삽입한다.
+   >
+   > [2] 삽입된 요소를 가리키는 반복자를 반환한다.
+   >
+   > ```c++
+   > list<int> ilist;
+   > 
+   > list<int>::iterator it = ilist.begin();
+   > 
+   > while(it != ilist.end()){
+   >     if(*it >= ival){
+   >         ilist.insert(it, ival);
+   >         break;
+   >     }
+   >     if(it == ilist.end())
+   >         ilist.push_back(ival);
+   > }
+   > ```
+
+2. void insert(iterator position, int count, elemType value)
+
+   > [1] position 앞에 value를 count만큼 삽입한다.
+   >
+   > ```c++
+   > string sval("Part Two");
+   > list<string> slist;
+   > 
+   > list<string>::iterator it = find(slist.begin(), slist.end(), sval);
+   > slist.insert(it, 8, string("dummy"));
+   > ```
+
+3. void insert(iterator1 position, iterator2 first, iterator2 last)
+
+   > [1] first에서 last까지로 표시된 범위의 요소를 position 앞에 삽입한다
+   >
+   > ```c++
+   > int ia1[7] = {1, 1, 2, 3, 5, 55, 89};
+   > int ia2[4] = {8, 13, 21, 24};
+   > list<int> elems(ia1, ia1+7);
+   > 
+   > // elems에서 55 요소의 위치를 반환
+   > list<int>::iterator it = find(elems.begin(), elems.end(), 55);
+   > elems.insert(it, ia2, ia2+4); // elems의 55위치에서부터 ia2의 요소들을 삽입
+   > ```
+
+4. iterator insert(iterator position)
+
+   > [1] position 앞에 요소를 삽입
+   >
+   > [2] 요소는 그 타입의 기본값으로 초기화된다.
+
+<br>
+
+### :pushpin: erase() 연산자의 두 가지 변화형
+
+1. iterator erase(iterator position)
+
+   > [1] position이 가리키는 요소를 삭제한다.
+   >
+   > ```c++
+   > list<string>::iterator it = find(slist.begin(), slist.end(), str); // str 문자열 객체의 위치를 반환
+   > slist.erase(it); // str 문자열 객체의 위치에 존재하는 요소를 삭제
+   > ```
+
+2. iterator erase(iterator first, iterator last)
+
+   > [1] first로 시작해서 last까지의 범위를 삭제(last는 미포함)
+   >
+   > ```c++
+   > list<string>::iterator first = slist.begin(), last = slist.end();
+   > 
+   > list<string>::iterator it1 = find(first, last, str); // 삭제할 첫 요소
+   > list<string>::iterator it2 = find(first, last, sval); // 삭제되지 않는 첫 요소
+   > slist.erase(it1, it2); // 두 인스턴스 모두 삭제된 요소의 다음을 가리키는 반복자를 반환
+   > ```
+
+<br>
