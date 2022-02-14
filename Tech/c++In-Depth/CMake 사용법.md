@@ -1,4 +1,4 @@
-## C++ In-Depth: Cmake
+## C++ In-Depth: CMake
 
 ***
 
@@ -16,7 +16,11 @@
 
 - 예를 들어 ```make```를 사용한다면 ```CMake```를 통해 ```Makefile```을 생성할 것이고, ```Ninja```를 사용한다면 ```CMake```를 통해서 ```.ninja``` 빌드 파일을 만들어줄 것이다.
 
-  > ```Ninja``` : 빌드 시스템
+  > ```Ninja```
+  >
+  > - 속도에 중점을 둔 소형 빌드 시스템
+  > - 상위 레벨 빌드 시스템에서 입력 파일을 생성하도록 설계(최대한 빠르게 빌드하도록 설계됨)
+  > - 닌자 빌드 파일을 생성하려면 빌드 생성기를 사용해야 한다(CMake와 같은)
 
 <br>
 
@@ -209,7 +213,7 @@ add_executable(program main.cpp foo.cpp)
 - 경우에 따라 헤더 파일들을 다른 곳에 위치시키는 경우, 컴파일러가 해당 파일들을 찾기 위해서는 컴파일 시에 따로 경로를 지정해줘야 한다.
 - ```target_include_directories(program PUBLIC ${CMAKE_SOURCE_DIR}/includes)``` 명령
   -  ```CMakeLists.txt```에 ```includes``` 디렉토리를 헤더 파일 경로 탐색 시 확인하라고 알려줘야 한다.
-  - ```$(CMAKE_SOURCE_DIR)```은 CMake에서 기본으로 제공하는 변수, 최상위 ```CMakeLists.txt```의 경로를 의미(프로젝트의 경로)
+  -  ```$(CMAKE_SOURCE_DIR)```은 CMake에서 기본으로 제공하는 변수, 최상위 ```CMakeLists.txt```의 경로를 의미(프로젝트의 경로)
 - 원본은 ```target_include_directories(<실행 파일 이름> PUBLIC <경로1> <경로2> ...)``` 와 같다.
 
 :round_pushpin: 중요한 점
@@ -307,7 +311,7 @@ CMake에서 A 라이브러리가 B 라이브러리를 사용한다면 A는 B의 
 
 이 부분에서 ```PUBLIC```으로 설정된 것은 물려 받고, ```PRIVATE```으로 설정된 것은 물려 받지 않는다.
 
-
+<br>
 
 **[target_include_directories 의미 및 사용법]**
 
@@ -369,11 +373,153 @@ target_link_libraries(program shape)
 
 CMake는 라이브러리를 만들게 되면 앞에 ```lib```를 붙인 라이브러리 파일을 생성한다.
 
+<br>
 
+### :pushpin: 다른 라이브러리를 사용하는 라이브러리
+
+기존의 ```shape``` 라이브러리에서 ```thread``` 라이브러리를 사용한다고 가정
+
+구현 부분이 저장된 ```lib``` 디렉토리의 ```shape``` 클래스 구현체를 다음과 같이 수정
+
+```c++
+#include <iostream>
+#include <thread>
+
+#include "shape.h"
+
+Rectangle::Rectangle(int width, int height) : width_(width), height_(height){ }
+int Rectangle::GetSize() const{
+  std::thread t([this]() { std::cout<<"Calulate.."<<std::endl; });
+  t.join();
+  
+  return width_*height_;
+}
+```
+
+**리눅스의 경우**
+
+- 보통 ```thread``` 라이브러리를 사용하려면 ```pthread``` 라이브러리를 링크시켜줘야 한다.
+- 따라서 ```/lib/shape```의 ```CMakeLists.txt```를 수정해줘야 한다.
+
+```cmake
+add_library(shape STATIC shape.cpp)
+target_include_directories(shape PUBLIC ${CMAKE_SOURCE_DIR}/includes)
+target_compile_options(shape PRIVATE -Wall -Werror)
+
+target_link_libraries(shape PRIVATE pthread)
+```
+
+:point_right: ```target_link_libraries```를 통해 ```shape```에 ```pthread``` 라이브러리를 추가해준 것
+
+이러한 의존 라이브러리 추가 방식은 3 가지가 존재한다(A 라이브러리를 참조할 경우를 가정)
+
+1. public : A를 헤더 파일과 구현 내부에서 모두 사용한다면
+2. private : A를 내부 구현에서만 사용하고 헤더 파일에서는 사용하지 않는다면
+3. interface : A를 헤더 파일에서만 사용하고 내부 구현에서는 사용하지 않는다면
+
+
+
+위의 ```target_link_libraries(shape PRIVATE pthread)``` 의 경우
+
+```<thread>``` 를 내부 구현(shape.cpp)에서만 사용하고 헤더 파일(shape.h)에서는 사용하고 있지 않으므로 ```pthread```를 ```private```으로 링크해주는 것 맞다.
+
+
+
+### :pushpin: 파일들 한꺼번에 추가하기(add_library)
+
+```cmake
+add_library(shape STATIC shape.cpp color.cpp circle.cpp)
+```
+
+위와 같이 해당 라이브러리를 빌드하는데 필요한 파일들을 명시해야 한다.
+
+라이브러리를 추가할 때마다 ```add_library```를 수정해야 하지만, CMake에서는 이 디렉토리에 있는 파일들을 모두 라이브러리를 빌드하는데 사용하라는 명령 방법을 제공한다.
+
+```file 레퍼런스 링크``` 형태로 위와 같은 방법을 제공한다.
+
+```cmake
+file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+
+add_library(shape STATIC ${SRC_FILES})
+```
+
+위 ```file``` 명령은 CMake에서 파일 관련 핸들링 명령이다.
+
+해당 파일들을 모아서 ```SRC_FILES``` 라는 변수를 구성하라는 의미
+
+
+
+```GLOB_RECURSE``` 옵션 : 인자로 주어진 디렉토리, 해당 디렉토리 내부에 모든 하위 디렉토리 까지 재귀적으로 살펴본다는 의미
+
+```GLOB``` 옵션 : 인자로 주어진 디렉토리만 살펴본다(하위 디렉토리를 포함하고 싶지 않을 때 사용)
+
+```CONFIGURE_DEPENDS``` 옵션 : ```GLOB```으로 불러오는 파일 목록이 이전과 다른 경우(파일 추가 및 삭제 했을 때) CMake를 재 실행해서 빌드 파일을 재생성하라는 의미
+
+
+
+**[주의 사항]**
+
+CMake에서는 위 명령으로 파일들을 읽어들이는 것을 권장하지 않는다.
+
+1. 파일이 추가되어도 CMake가 생성한 빌드 파일 안에 명시된 파일들이 바뀌는 것은 아니기 때문
+
+   :point_right: 어차피 CMake를 통해 빌드 파일을 재생성 해야 함
+
+2. ```CONFIGURE_DEPENDS``` 옵션을 부여해도 모든 빌드 시스템에서 안정적으로 작동하지 않는다고 한다.
+
+<br>
 
 ### :pushpin: 현재의 CMake 패러다임은 타겟들을 기준으로 돌아간다.
 
 > 꼭 ```target_*``` 형태의 명령을 사용해야 한다.
+
+
+
+### :pushpin: 원하는 라이브러리를 설치하는 FetchContent
+
+Python :point_right: ```PIP```
+
+Rust :point_right: ```Cargo```
+
+외부 라이브러리들을 쉽게 불러오고 설치하는 프로그램이 기본으로 제공
+
+하지만
+
+C++에는 언어 상 제공하는 기능이 없다. :point_right: 외부 라이브러리를 불러오거나 설치하는 것이 불편하다.
+
+하지만
+
+CMake에서 제공하는 ```FetchContent```를 사용하면 왠만한 외부 라이브러리들을 쉽게 불러오고 설치 가능
+
+```FetchContent 레퍼런스 링크``` 형태로 사용한다.
+
+
+
+**[주의 사항]**
+
+- ```FetchContent```를 사용하기 위해서는 적어도 3.11 이상의 CMake를 사용해야 한다.
+- 3.11 이하의 CMake는 ```ExternalProject``` 모듈을 사용해도 된다.
+- 이 둘의 차이는 ```FetchContent```는 CMake를 실행하는 시점에서 외부 파일들을 불러오지만, ```ExternalProject```는 빌드 타임에 불러온다
+
+
+
+**[간단한 fmt 라이브러리 불러오기]**
+
+```cmake
+include(FetchContent)
+FetchContent_Declare(
+	Fmt
+	GIT_REPOSITORY "https://github.com/fmtlib/fmt"
+	GIT_TAG "7.1.3"
+)
+
+FetchContent_MakeAvailable(Fmt)
+```
+
+1. include를 통해 ```FetchContent``` 모듈을 불러와야 한다.
+2. 어디에서 데이터를 불러올지 명시한다(위 경우는 깃허브에서 특정 릴리즈를 가져옴)
+3. 불러온 라이브러리를 사용할 수 있도록 설정한다. ```FetchContent_MakeAvailable```를 통해 설정
+4. ```FetchContent```로 불러온 라이브러리는 **프로젝트 전체**에서 사용 가능
 
 
 
