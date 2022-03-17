@@ -58,6 +58,8 @@
   23. [정의의 의존성과 순환 의존성을 최소화하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2023).md)
   24. [헤더 파일은 충분히 완성된 형태로 만들어라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2024).md)
   25. [내부 #include 가드를 사용하라, 외부 #include 가드를 써서는 안 된다](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2025).md)
+  26. [값, (스마트)포인터, 참조 중 적절한 방식으로 인자를 얻어라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2026).md)
+  27. [오버로딩된 연산자의 본래 의미를 유지하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2027).md)
   
 - class 15 : :page_facing_up: **C++ In-Depth**
   1. [C++ 프로그램의 작성법](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B1%5DC%2B%2B%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%98%20%EC%9E%91%EC%84%B1%EB%B2%95.md)
