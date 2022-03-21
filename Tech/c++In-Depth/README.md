@@ -32,7 +32,9 @@
 
 - class 13 : [:page_facing_up: NULL Pointer에 대한 이야기](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/Null%20%ED%8F%AC%EC%9D%B8%ED%84%B0.md)
 
-- class 14 : :page_facing_up: **Coding rules**
+- class 14 : [:page_facing_up: Multicasting, 다중 클라이언트 채팅방](https://github.com/Lee-HyeongSeok/Tech-For-Developer/tree/master/Tech/c%2B%2BIn-Depth/Multicasting%20Programming)
+
+- class 15 : :page_facing_up: **Coding rules**
   1. [작은 것에 연연하지 말라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%201).md)
   2. [사소한 경고 메시지라도 무시하지 말라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%202).md)
   3. [자동화된 빌드 시스템을 사용하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%203).md)
@@ -60,8 +62,9 @@
   25. [내부 #include 가드를 사용하라, 외부 #include 가드를 써서는 안 된다](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2025).md)
   26. [값, 포인터, 스마트 포인터, 참조 중 적절한 방식으로 인자를 얻어라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2026).md)
   27. [오버로딩된 연산자의 본래 의미를 유지하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2027).md)
+  28. [표준적인 형식의 산술 및 할당 연산자를 사용하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2028).md)
   
-- class 15 : :page_facing_up: **C++ In-Depth**
+- class 16 : :page_facing_up: **C++ In-Depth**
   1. [C++ 프로그램의 작성법](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B1%5DC%2B%2B%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%98%20%EC%9E%91%EC%84%B1%EB%B2%95.md)
   2. [데이터 객체의 정의와 초기화](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B2%5D%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EA%B0%9D%EC%B2%B4(data%20object)%EC%9D%98%20%EC%A0%95%EC%9D%98(definition)%EC%99%80%20%EC%B4%88%EA%B8%B0%ED%99%94.md)
   3. [문자 리터럴(literal)과 특별 기호(escape sequences)](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B3%5D%EB%AC%B8%EC%9E%90%20%EB%A6%AC%ED%84%B0%EB%9F%B4(literal)%EA%B3%BC%20%ED%8A%B9%EB%B3%84%20%EA%B8%B0%ED%98%B8.md)
