@@ -67,6 +67,8 @@
   30. [간접적인 타입 변환을 피하기 위해 오버로딩을 활용하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2030).md)
   31. [&&, ||, 콤마의 오버로딩은 피하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2031).md)
   32. [함수 인자의 처리 순서에 좌우되는 코드는 좋지 않다](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2032).md)
+  33. [만들고 있는 클래스가 무엇인지 확실히 하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2033).md)
+  34. [최소화된 클래스를 사용하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2034).md)
   
 - class 16 : :page_facing_up: **C++ In-Depth**
   1. [C++ 프로그램의 작성법](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B1%5DC%2B%2B%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%98%20%EC%9E%91%EC%84%B1%EB%B2%95.md)
