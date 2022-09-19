@@ -112,6 +112,7 @@
   25. [템플릿 메타 프로그래밍](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B25%5D%ED%85%9C%ED%94%8C%EB%A6%BF%20%EB%A9%94%ED%83%80%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D(Template%20Meta%20Programming).md)
   26. [상수 표현식(Constant Expressions)과 기본 매개변수](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B26%5D%EC%83%81%EC%88%98%20%ED%91%9C%ED%98%84%EC%8B%9D(Constant%20Expressions)%EA%B3%BC%20%EA%B8%B0%EB%B3%B8%20%EB%A7%A4%EA%B0%9C%EB%B3%80%EC%88%98.md)
   27. [type_traits 라이브러리](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B27%5Dtype_traits%20%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC.md)
+  28. [전략으로서의 템플릿 매개변수](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B28%5D%20%EC%A0%84%EB%9E%B5%EC%9C%BC%EB%A1%9C%EC%84%9C%EC%9D%98%20%ED%85%9C%ED%94%8C%EB%A6%BF%20%EB%A7%A4%EA%B0%9C%EB%B3%80%EC%88%98.md)
   
   
   
