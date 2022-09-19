@@ -81,6 +81,8 @@
   44. [Pimpl을 적절히 활용하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2044).md)
   45. [비멤버 함수를 활용하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2045).md)
   46. [new와 delete는 항상 함께 제공하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2046).md)
+  47. [특정한 클래스에 맞는 new를 제공한다면 모든 표준 형식을 제공해야 한다](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2047).md)
+  48. [멤버 변수의 정의와 선언은 같은 순서로 하라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%2048).md)
   
 - class 16 : :page_facing_up: **C++ In-Depth**
   1. [C++ 프로그램의 작성법](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B1%5DC%2B%2B%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%98%20%EC%9E%91%EC%84%B1%EB%B2%95.md)
