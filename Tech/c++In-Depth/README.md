@@ -113,6 +113,8 @@
   26. [상수 표현식(Constant Expressions)과 기본 매개변수](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B26%5D%EC%83%81%EC%88%98%20%ED%91%9C%ED%98%84%EC%8B%9D(Constant%20Expressions)%EA%B3%BC%20%EA%B8%B0%EB%B3%B8%20%EB%A7%A4%EA%B0%9C%EB%B3%80%EC%88%98.md)
   27. [type_traits 라이브러리](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B27%5Dtype_traits%20%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC.md)
   28. [전략으로서의 템플릿 매개변수](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20in-depth/%5B28%5D%20%EC%A0%84%EB%9E%B5%EC%9C%BC%EB%A1%9C%EC%84%9C%EC%9D%98%20%ED%85%9C%ED%94%8C%EB%A6%BF%20%EB%A7%A4%EA%B0%9C%EB%B3%80%EC%88%98.md)
+  29. [컴파일 타임의 구문 분석에 따른 nullptr 가능성](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/C%2B%2B%20%EC%BB%B4%ED%8C%8C%EC%9D%BC%20%ED%83%80%EC%9E%84%EC%9D%98%20%EA%B5%AC%EB%AC%B8%20%EB%B6%84%EC%84%9D%EC%97%90%20%EB%94%B0%EB%A5%B8%20nullptr%20%EA%B0%80%EB%8A%A5%EC%84%B1.md)
+  30. [Curiously Recursing Template Pattern](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/CRTP(Curiously%20Recursing%20Template%20Pattern).md)
   
   
   
