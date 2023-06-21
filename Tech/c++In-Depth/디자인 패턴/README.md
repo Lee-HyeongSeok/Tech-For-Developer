@@ -37,6 +37,6 @@
 ### :pushpin: 패턴 종류
 
 1. 생성 패턴
-   - 팩토리 메서드
+   - [팩토리 메서드](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/%EB%94%94%EC%9E%90%EC%9D%B8%20%ED%8C%A8%ED%84%B4/%EC%83%9D%EC%84%B1%20%ED%8C%A8%ED%84%B4/%EC%83%9D%EC%84%B1%20%ED%8C%A8%ED%84%B4%20-%20%ED%8C%A9%ED%86%A0%EB%A6%AC%20%EB%A9%94%EC%84%9C%EB%93%9C%20%ED%8C%A8%ED%84%B4.md)
 2. 구조 패턴
 3. 행동 패턴
