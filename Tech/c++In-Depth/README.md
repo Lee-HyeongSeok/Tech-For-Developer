@@ -34,7 +34,7 @@
 
 - class 14 : [:page_facing_up: Multicasting, 다중 클라이언트 채팅방](https://github.com/Lee-HyeongSeok/Tech-For-Developer/tree/master/Tech/c%2B%2BIn-Depth/Multicasting%20Programming)
 
-- class 15 : [:page_facing_up: 디자인 패턴]()
+- class 15 : [:page_facing_up: 디자인 패턴](https://github.com/Lee-HyeongSeok/Tech-For-Developer/tree/master/Tech/c%2B%2BIn-Depth/%EB%94%94%EC%9E%90%EC%9D%B8%20%ED%8C%A8%ED%84%B4)
 
 - class 16 : :page_facing_up: **Coding rules**
   1. [작은 것에 연연하지 말라](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/c%2B%2BIn-Depth/c%2B%2B%20coding%20rules/C%2B%2B%20In-Depth%20Coding%20rules(class%201).md)
