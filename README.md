@@ -14,4 +14,5 @@
 - [Network Security](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/Network%20Security.md)
 - [C++ Memory Model](https://github.com/Lee-HyeongSeok/Tech-For-Developer/tree/master/Tech/C%2B%2B%20Memory%20Model%20Class) 
 - [C++ In-Depth](https://github.com/Lee-HyeongSeok/Tech-For-Developer/tree/master/Tech/c%2B%2BIn-Depth)
+- [Software Requirements](https://github.com/Lee-HyeongSeok/Tech-For-Developer/blob/master/Tech/Software%20Requirements.md)
 
